@@ -1,0 +1,138 @@
+<div class="contact-container">
+  <!-- Header Section -->
+  <section class="header-section">
+    <h1 class="page-title">Contacto</h1>
+    <p class="page-subtitle">
+      ¿Tienes un proyecto en mente? Me encantaría escuchar sobre él. 
+      No dudes en contactarme para cualquier consulta o colaboración.
+    </p>
+  </section>
+
+  <div class="contact-content">
+    <!-- Contact Form -->
+   <!--  <section class="form-section">
+      <mat-card class="form-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>send</mat-icon>
+            Envíame un Mensaje
+          </mat-card-title>
+          <mat-card-subtitle>
+            Completa el formulario y me pondré en contacto contigo lo antes posible.
+          </mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="name" placeholder="Tu nombre completo">
+                <mat-error *ngIf="contactForm.get('name')?.hasError('required')">
+                  El nombre es requerido
+                </mat-error>
+                <mat-error *ngIf="contactForm.get('name')?.hasError('minlength')">
+                  El nombre debe tener al menos 2 caracteres
+                </mat-error>
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email" placeholder="tu@email.com">
+                <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+                  El email es requerido
+                </mat-error>
+                <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
+                  Ingresa un email válido
+                </mat-error>
+              </mat-form-field>
+            </div>
+            
+            <mat-form-field appearance="outline" class="form-field full-width">
+              <mat-label>Asunto</mat-label>
+              <input matInput formControlName="subject" placeholder="¿Sobre qué quieres hablar?">
+              <mat-error *ngIf="contactForm.get('subject')?.hasError('required')">
+                El asunto es requerido
+              </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="form-field full-width">
+              <mat-label>Mensaje</mat-label>
+              <textarea matInput formControlName="message" rows="6" 
+                        placeholder="Cuéntame sobre tu proyecto o consulta..."></textarea>
+              <mat-error *ngIf="contactForm.get('message')?.hasError('required')">
+                El mensaje es requerido
+              </mat-error>
+              <mat-error *ngIf="contactForm.get('message')?.hasError('minlength')">
+                El mensaje debe tener al menos 10 caracteres
+              </mat-error>
+            </mat-form-field>
+            
+             <mat-checkbox formControlName="newsletter" class="newsletter-checkbox">
+              Quiero recibir actualizaciones sobre nuevos proyectos y artículos
+            </mat-checkbox> 
+            
+            <button mat-raised-button color="primary" type="submit" 
+                    class="submit-button" [disabled]="contactForm.invalid || isSubmitting()">
+              <mat-icon *ngIf="!isSubmitting()">send</mat-icon>
+              <mat-icon *ngIf="isSubmitting()" class="spinning">refresh</mat-icon>
+              {{ isSubmitting() ? 'Enviando...' : 'Enviar Mensaje' }}
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </section>
+ -->
+    <!-- Contact Info -->
+    <section class="info-section">
+      <mat-card class="info-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>contact_mail</mat-icon>
+            Información de Contacto
+          </mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <div class="contact-info-list">
+            @for (info of contactInfo(); track info.title) {
+              <div class="contact-info-item">
+                <mat-icon class="info-icon">{{ info.icon }}</mat-icon>
+                <div class="info-content">
+                  <h4>{{ info.title }}</h4>
+                  @if (info.link) {
+                    <a [href]="info.link" target="_blank" rel="noopener">{{ info.value }}</a>
+                  } @else {
+                    <span>{{ info.value }}</span>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+      
+      <!-- Social Links -->
+      <mat-card class="social-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>share</mat-icon>
+            Sígueme en Redes Sociales
+          </mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+            <div class="social-links">
+              @for (link of socialLinks(); track link.name) {
+                <a [href]="link.url" target="_blank" rel="noopener" class="social-link">
+                  <mat-icon [style.color]="link.color">{{ link.icon }}</mat-icon>
+                  <span>{{ link.name }}</span>
+                </a>
+              }
+            </div>
+          </mat-card-content>
+      </mat-card>
+    </section>
+    
+  </div>
+</div>

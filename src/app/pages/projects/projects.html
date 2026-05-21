@@ -1,0 +1,321 @@
+<div class="projects-container">
+  <!-- Header Section -->
+  <section class="header-section">
+    <h1 class="page-title">Mis Proyectos</h1><br>
+    <p class="page-subtitle">
+      Una colección de proyectos que demuestran mis habilidades en desarrollo web.
+      Desde aplicaciones frontend hasta APIs robustas.
+    </p>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="featured-section">
+    <h2 class="section-title">
+      <mat-icon>star</mat-icon>
+      Proyectos Destacados
+    </h2>
+    <div class="featured-grid">
+      @for (project of getFeaturedProjects(); track project.id) {
+        <mat-card class="featured-card" (click)="openDetail(project)">
+          <div class="project-image carousel-host">
+            @if (getImages(project).length > 0) {
+              <img
+                class="carousel-image"
+                [src]="getImages(project)[getCarouselIndex(project.id)]"
+                [alt]="project.title"
+              />
+              @if (getImages(project).length > 1) {
+                <button
+                  type="button"
+                  class="carousel-nav carousel-nav--prev"
+                  aria-label="Imagen anterior"
+                  (click)="prevCarousel(project, $event)"
+                >
+                  <mat-icon>chevron_left</mat-icon>
+                </button>
+                <button
+                  type="button"
+                  class="carousel-nav carousel-nav--next"
+                  aria-label="Imagen siguiente"
+                  (click)="nextCarousel(project, $event)"
+                >
+                  <mat-icon>chevron_right</mat-icon>
+                </button>
+                <div class="carousel-dots" role="tablist" aria-label="Imágenes del proyecto">
+                  @for (img of getImages(project); track $index) {
+                    <button
+                      type="button"
+                      class="carousel-dot"
+                      [class.active]="$index === getCarouselIndex(project.id)"
+                      [attr.aria-label]="'Ir a imagen ' + ($index + 1)"
+                      [attr.aria-selected]="$index === getCarouselIndex(project.id)"
+                      (click)="goToCarouselSlide(project, $index, $event)"
+                    ></button>
+                  }
+                </div>
+              }
+            } @else {
+              <div class="image-placeholder">
+                <mat-icon>code</mat-icon>
+              </div>
+            }
+            @if (project.featured) {
+              <div class="featured-badge">
+                <mat-icon>star</mat-icon>
+                Destacado
+              </div>
+            }
+          </div>
+
+          <mat-card-header>
+            <mat-card-title>{{ project.title }}</mat-card-title>
+            <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p class="project-description">{{ project.longDescription }}</p>
+
+            <div class="technologies">
+              @for (tech of project.technologies; track tech) {
+                <mat-chip>{{ tech }}</mat-chip>
+              }
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+              <a mat-raised-button color="primary" class="detail-primary-action" [href]="project.githubUrl" target="_blank" rel="noopener noreferrer">
+            <mat-icon>launch</mat-icon>
+            Ver Código
+          </a>
+          @if (project.liveUrl) {
+          <a mat-stroked-button color="primary" [href]="project.liveUrl" target="_blank" rel="noopener noreferrer">
+            <mat-icon>launch</mat-icon>
+            Ver Demo
+          </a>
+        }
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  </section>
+
+  <!-- All Projects with Filter -->
+  <section class="all-projects-section">
+    <h2 class="section-title">
+      <mat-icon>apps</mat-icon>
+      Todos los Proyectos
+    </h2>
+
+    <!-- Filter Tabs -->
+    <mat-tab-group class="filter-tabs" (selectedTabChange)="filterProjects($event)">
+      @for (category of categories(); track category.key) {
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>{{ category.icon }}</mat-icon>
+            {{ category.label }}
+          </ng-template>
+        </mat-tab>
+      }
+    </mat-tab-group>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      @for (project of filteredProjects(); track project.id) {
+        <mat-card class="project-card project-card--clickable" (click)="openDetail(project)">
+          <div class="project-image carousel-host">
+            @if (getImages(project).length > 0) {
+              <img
+                class="carousel-image"
+                [src]="getImages(project)[getCarouselIndex(project.id)]"
+                [alt]="project.title"
+              />
+              @if (getImages(project).length > 1) {
+                <button
+                  type="button"
+                  class="carousel-nav carousel-nav--prev"
+                  aria-label="Imagen anterior"
+                  (click)="prevCarousel(project, $event)"
+                >
+                  <mat-icon>chevron_left</mat-icon>
+                </button>
+                <button
+                  type="button"
+                  class="carousel-nav carousel-nav--next"
+                  aria-label="Imagen siguiente"
+                  (click)="nextCarousel(project, $event)"
+                >
+                  <mat-icon>chevron_right</mat-icon>
+                </button>
+                <div class="carousel-dots" role="tablist" aria-label="Imágenes del proyecto">
+                  @for (img of getImages(project); track $index) {
+                    <button
+                      type="button"
+                      class="carousel-dot"
+                      [class.active]="$index === getCarouselIndex(project.id)"
+                      [attr.aria-label]="'Ir a imagen ' + ($index + 1)"
+                      [attr.aria-selected]="$index === getCarouselIndex(project.id)"
+                      (click)="goToCarouselSlide(project, $index, $event)"
+                    ></button>
+                  }
+                </div>
+              }
+            } @else {
+              <div class="image-placeholder">
+                <mat-icon>code</mat-icon>
+              </div>
+            }
+            <div class="category-badge" [class]="'category-' + project.category">
+              {{ project.category }}
+            </div>
+          </div>
+
+          <mat-card-header>
+            <mat-card-title>{{ project.title }}</mat-card-title>
+            <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="technologies">
+              @for (tech of project.technologies; track tech) {
+                <mat-chip>{{ tech }}</mat-chip>
+              }
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+             <a mat-raised-button color="primary" class="detail-primary-action" [href]="project.githubUrl" target="_blank" rel="noopener noreferrer">
+            <mat-icon>launch</mat-icon>
+            Ver Código
+          </a>
+          @if (project.liveUrl) {
+          <a mat-stroked-button color="primary" [href]="project.liveUrl" target="_blank" rel="noopener noreferrer">
+            <mat-icon>launch</mat-icon>
+            Ver Demo
+          </a>
+        }
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <mat-card class="cta-card">
+      <mat-card-content>
+        <div class="cta-content">
+          <mat-icon class="cta-icon">rocket_launch</mat-icon>
+          <h3>¿Interesado en colaborar?</h3>
+          <p>Estoy siempre abierta a nuevos proyectos y oportunidades de colaboración.</p>
+          <a mat-raised-button color="primary" class="cta-button" routerLink="/contact">
+            <mat-icon>contact_mail</mat-icon>
+            Contactar
+          </a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>
+
+@if (selectedProject(); as project) {
+  <div class="project-detail-backdrop" (click)="closeDetail()" role="presentation"></div>
+  <div class="project-detail-panel" role="dialog" aria-modal="true" [attr.aria-label]="project.title">
+    <button type="button" class="detail-close" aria-label="Cerrar detalle" (click)="closeDetail()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="detail-layout">
+      <aside class="detail-thumbnails">
+        @if (getImages(project).length > 0) {
+          @for (img of getImages(project); track $index) {
+            <button
+              type="button"
+              class="thumbnail-btn"
+              [class.active]="$index === getDetailImageIndex()"
+              (click)="setDetailImage($index)"
+            >
+              <img [src]="img" [alt]="project.title + ' vista ' + ($index + 1)" />
+            </button>
+          }
+        } @else {
+          <div class="thumbnail-placeholder">
+            <mat-icon>code</mat-icon>
+          </div>
+        }
+      </aside>
+
+      <div class="detail-gallery">
+        @if (getImages(project).length > 0) {
+          <div class="detail-main-image">
+            <img
+              [src]="getImages(project)[getDetailImageIndex()]"
+              [alt]="project.title"
+            />
+            @if (getImages(project).length > 1) {
+              <button
+                type="button"
+                class="carousel-nav carousel-nav--prev"
+                aria-label="Imagen anterior"
+                (click)="prevDetailImage()"
+              >
+                <mat-icon>chevron_left</mat-icon>
+              </button>
+              <button
+                type="button"
+                class="carousel-nav carousel-nav--next"
+                aria-label="Imagen siguiente"
+                (click)="nextDetailImage()"
+              >
+                <mat-icon>chevron_right</mat-icon>
+              </button>
+            }
+          </div>
+        } @else {
+          <div class="detail-main-placeholder">
+            <mat-icon>code</mat-icon>
+          </div>
+        }
+      </div>
+
+      <div class="detail-info">
+        <span class="detail-category" [class]="'category-' + project.category">
+          {{ project.category }}
+        </span>
+        @if (project.featured) {
+          <span class="detail-featured">
+            <mat-icon>star</mat-icon>
+            Destacado
+          </span>
+        }
+
+        <h2 class="detail-title">{{ project.title }}</h2>
+        <p class="detail-subtitle">{{ project.description }}</p>
+
+        <p class="detail-description">{{ project.longDescription }}</p>
+
+        <div class="detail-specs">
+          <h3>Tecnologías</h3>
+          <ul>
+            @for (tech of project.technologies; track tech) {
+              <li>{{ tech }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="detail-actions">
+          <a mat-raised-button color="primary" class="detail-primary-action" [href]="project.githubUrl" target="_blank" rel="noopener noreferrer">
+            <mat-icon>launch</mat-icon>
+            Ver Código
+          </a>
+          @if (project.liveUrl) {
+          <a mat-stroked-button color="primary" [href]="project.liveUrl" target="_blank" rel="noopener noreferrer">
+            <mat-icon>launch</mat-icon>
+            Ver Demo
+          </a>
+        }
+          
+        </div>
+      </div>
+    </div>
+  </div>
+}

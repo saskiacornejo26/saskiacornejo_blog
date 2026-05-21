@@ -1,0 +1,120 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  
+  .sidenav-toolbar {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+    
+    .logo {
+      font-family: 'Roboto', sans-serif;
+      letter-spacing: 1px;
+    }
+  }
+  
+  .nav-list {
+    padding-top: 0;
+    
+    a {
+      color: white;
+      margin: 4px 8px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(4px);
+      }
+      
+      &.active-link {
+        background: rgba(255, 255, 255, 0.2);
+        font-weight: 600;
+        
+        mat-icon {
+          color: #ffd700;
+        }
+      }
+      
+      mat-icon {
+        margin-right: 16px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+}
+
+.main-content {
+  background: #fafafa;
+  flex: 1;
+  position: relative;
+  z-index: 20;
+}
+
+.main-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+  .toolbar-title {
+    flex: 1;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 8px;
+    
+      a {
+        color: black;
+      transition: transform 0.2s ease;
+      
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+.content-wrapper {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 64px);
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .sidenav {
+    width: 280px;
+    position: fixed; /* o relative/absolute */
+    z-index: 10;     /* Un número bajo para la barra lateral */
+  }
+  
+  .content-wrapper {
+    padding: 16px;
+  }
+  
+  .main-toolbar {
+    .toolbar-title {
+      font-size: 1rem;
+    }
+    
+    .social-links {
+      gap: 4px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .content-wrapper {
+    padding: 12px;
+  }
+}

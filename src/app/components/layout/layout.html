@@ -1,0 +1,64 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar -->
+  <mat-sidenav 
+    #drawer 
+    class="sidenav" 
+    fixedInViewport
+    [attr.role]="(isHandset() ? 'dialog' : 'navigation')"
+    [mode]="(isHandset() ? 'over' : 'side')"
+    [opened]="(!isHandset()) || isSidenavOpen()"
+    (closed)="isSidenavOpen.set(false)">
+    
+    <mat-toolbar class="sidenav-toolbar">
+      <span class="logo">Saskia Cornejo</span>
+    </mat-toolbar>
+    
+    <mat-nav-list class="nav-list">
+      @for (item of menuItems; track item.route) {
+        <a mat-list-item 
+           [routerLink]="item.route" 
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{exact: true}"
+           (click)="isHandset() && isSidenavOpen.set(false)">
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle>{{ item.label }}</span>
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main content -->
+  <mat-sidenav-content class="main-content">
+    <!-- Top toolbar -->
+    <mat-toolbar class="main-toolbar" color="primary">
+      @if (isHandset()) {
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="toggleSidenav()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      }
+      <span class="toolbar-title">Mi Blog Personal</span>
+      
+      <!-- Social links -->
+      <div class="social-links">
+        <a [href]="githubUrl" target="_blank" rel="noopener" mat-icon-button>
+          <mat-icon>code</mat-icon>
+        </a>
+        <a [href]="linkedinUrl" target="_blank" rel="noopener" mat-icon-button>
+          <mat-icon>work</mat-icon>
+        </a>
+        <a [href]="email" mat-icon-button>
+          <mat-icon>email</mat-icon>
+        </a>
+      </div>
+    </mat-toolbar>
+
+    <!-- Page content -->
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

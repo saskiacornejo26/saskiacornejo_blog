@@ -1,0 +1,163 @@
+<div class="about-container">
+  <!-- Header Section -->
+  <section class="header-section">
+    <h1 class="page-title">Sobre Mí</h1>
+    <p class="page-subtitle">
+      Conoce mi trayectoria profesional, experiencia y pasión por el desarrollo de software.
+    </p>
+  </section>
+
+  <!-- Personal Story -->
+  <section class="story-section">
+    <mat-card class="story-card">
+      <mat-card-content>
+        <div class="story-content">
+          <div class="story-text">
+            <h2>Mi Historia</h2>
+            <p>
+              Soy ingeniera de sistemas y desarrolladora de software con pasión por crear tecnología que realmente mejore la vida de las personas.
+Hace más de cinco años descubrí mi fascinación por transformar ideas en soluciones reales a través del código.
+            </p>
+            <p>
+              Me especializo en desarrollo full stack y tengo experiencia trabajando con metodologías ágiles, disfrutando especialmente del trabajo en equipo y la mejora constante.
+Mi nivel intermedio de inglés me permite colaborar con proyectos y equipos de diferentes partes del mundo.
+            </p>
+          </div>
+          <div class="story-image">
+            <div class="image-placeholder">
+              <mat-icon>person</mat-icon>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="experience-section">
+    <h2 class="section-title">
+      <mat-icon>work</mat-icon>
+      Experiencia Profesional
+    </h2>
+    
+    <div class="experience-timeline">
+      @for (exp of experiences(); track exp.company) {
+        <mat-card class="experience-card">
+          <mat-card-header>
+            <mat-card-title>{{ exp.position }}</mat-card-title>
+            <mat-card-subtitle>{{ exp.company }} • {{ exp.period }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="experience-description">{{ exp.description }}</p>
+            <div class="technologies">
+              @for (tech of exp.technologies; track tech) {
+                <mat-chip class="tech-chip">{{ tech }}</mat-chip>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="education-section">
+    <h2 class="section-title">
+      <mat-icon>school</mat-icon>
+      Educación
+    </h2>
+    
+    <div class="education-grid">
+      @for (edu of education(); track edu.institution) {
+        <mat-card class="education-card">
+          <mat-card-header>
+            <mat-card-title>{{ edu.degree }}</mat-card-title>
+            <mat-card-subtitle>{{ edu.institution }} • {{ edu.period }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ edu.description }}</p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section class="certifications-section">
+    <h2 class="section-title">
+      <mat-icon>verified</mat-icon>
+      Certificaciones
+    </h2>
+    
+    <mat-card class="certifications-card">
+      <mat-card-content>
+        <div class="certifications-grid">
+          @for (cert of certifications(); track cert) {
+            <div class="certification-item">
+              <mat-icon class="cert-icon">verified</mat-icon>
+              <span>{{ cert }}</span>
+            </div>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- Skills Summary -->
+  <section class="skills-summary-section">
+    <h2 class="section-title">
+      <mat-icon>code</mat-icon>
+      Resumen de Habilidades
+    </h2>
+    
+    <div class="skills-summary-grid">
+      <mat-card class="skill-category-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>web</mat-icon>
+            Frontend
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            @for (cert of frontEnd(); track cert) {
+              {{'-'+cert}}
+            }
+          </p>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="skill-category-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>storage</mat-icon>
+            Backend
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+         <p>
+          @for (cert of backEnd(); track cert) {
+            {{'-'+cert}}
+          }
+         </p>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="skill-category-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>cloud</mat-icon>
+            DevOps & Cloud
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            @for (cert of devOps(); track cert) {
+              {{'-'+cert}}
+            }
+           </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,125 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="profile-section">
+        <div class="profile-image">
+          <div class="avatar-placeholder">
+            <mat-icon>person</mat-icon>
+          </div>
+        </div>
+        <div class="profile-info">
+          <h1 class="name">Saskia Cornejo</h1>
+          <h2 class="title">Desarrolladora Full Stack</h2>
+          <p class="description">
+            Apasionada por crear experiencias digitales que marcan la diferencia. Especializada en desarrollo frontend y backend, con un enfoque constante en la calidad, la innovación y el aprendizaje continuo.
+          </p>
+        </div>
+      </div>
+      
+      <div class="cta-section">
+       <a 
+        [routerLink]="'/projects'" 
+         mat-raised-button color="primary" class="cta-button">
+          <mat-icon>work</mat-icon>
+          Ver Proyectos
+       </a>
+       <a 
+        [routerLink]="'/contact'" 
+         mat-raised-button color="primary" class="cta-button">
+          <mat-icon>work</mat-icon>
+          Contactar
+       </a>
+       <a
+        href="/assets/CV SASKIA CORNEJOF.pdf"
+        download="CV_Saskia_Cornejo.pdf"
+        mat-raised-button
+        color="primary"
+        class="cta-button"
+      >
+        <a target="_blank" rel="noopener">
+          <mat-icon>work</mat-icon>
+        </a>
+        CV
+      </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="skills-section">
+    <mat-card class="skills-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>code</mat-icon>
+          Tecnologías y Habilidades
+        </mat-card-title>
+        <mat-card-subtitle>
+          Herramientas y tecnologías que utilizo en mis proyectos
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="skills-grid">
+          @for (skill of skills(); track skill) {
+            <mat-chip >{{ skill }}</mat-chip>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- Quick Stats -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Años de Experiencia</div>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Proyectos Completados</div>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Tecnologías Dominadas</div>
+        </mat-card-content>
+      </mat-card>
+      
+      <!-- <mat-card class="stat-card">
+        <mat-card-content>
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Certificaciones</div>
+        </mat-card-content>
+      </mat-card> -->
+    </div>
+  </section>
+
+  <!-- Social Links -->
+  <section class="social-section">
+    <mat-card class="social-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>share</mat-icon>
+          Conecta Conmigo
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="social-links">
+          @for (link of socialLinks(); track link.name) {
+            <a [href]="link.url" target="_blank" rel="noopener" class="social-link">
+              <mat-icon [style.color]="link.color">{{ link.icon }}</mat-icon>
+              <span>{{ link.name }}</span>
+            </a>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>
